@@ -1,0 +1,39 @@
+#!/bin/zsh
+
+# A bash script to create a note in my Zettelkasten
+# Based on Mischa van den Burg's zet script and 
+# ZazenCodes
+
+# Mischa: https://github.com/mischavandenburg
+# ZazenCodes: https://www.youtube.com/@ZazenCodes
+
+# TODO
+# 1. Rewrite in C? Or maybe just Golang.
+
+# Make sure a filename is set
+if [ -z "$1" ]; then
+  echo "Error: A file name must be set"
+  exit 1
+fi
+
+# If no hyphens are used, replace spaces with hyphens
+# (probably not needed anymore)
+file_name=$(echo "$1" | tr ' ' '-')
+formatted_file_name=$(date "+%Y-%m-%d")_${file_name}.md
+
+# cd into Inbox dir
+cd "/Users/jason/Library/Mobile Documents/iCloud~md~obsidian/Documents/le_vault/00-Inbox/" || exit
+
+# Create a unique ID
+timestamp="$(date +"%Y%m%d%H%M")"
+
+#Create the file
+touch "${formatted_file_name}"
+
+# Add unique ID to the file
+{
+  echo "$timestamp"
+} >>"${formatted_file_name}"
+
+# Open in neovim and apply Note template from Obsidian
+nvim '+ normal ggzzi' "${formatted_file_name}" -c ":ObsidianTemplate Note"
