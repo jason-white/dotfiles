@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Check if the correct number of arguments is provided
+# Check that the correct arguments are being used
 if [ "$#" -ne 2 ]; then
   echo "Error: You must provide a filename & URL"
   exit 1
@@ -35,7 +35,7 @@ tags:
 # Write the YAML front matter to the file
 echo "$YAML_CONTENT" > "$PREPENDED_FILENAME"
 
-# Inform the user
+# Inform the user (probably not necessary since we open vim)
 echo "New link created created: $PREPENDED_FILENAME"
 
 nvim '+ normal ggzzi' "${PREPENDED_FILENAME}"
