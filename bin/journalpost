@@ -2,15 +2,18 @@
 
 # Check that the correct arguments are being used
 if [ "$#" -ne 2 ]; then
-  echo "Error: You must provide a filename & URL"
+  echo "Error: You must provide a file name and year"
   exit 1
 fi
 
 # Assign arguments to variables
 FILENAME=$1
-URL=$2
+YEAR=$2
 
-cd "/Users/jason/Dev/jasonwhite.us/content/links/" || exit
+# Remove hyphens and replace them with spaces to create the title
+TITLE=$(echo "$FILENAME" | sed 's/-/ /g')
+
+cd "/Users/jason/Dev/jasonwhite.us/content/journal/${YEAR}/" || exit
 
 # Get the current date in the required formats
 CURRENT_DATE=$(date '+%Y-%m-%d')
@@ -21,13 +24,23 @@ PREPENDED_FILENAME="${CURRENT_DATE}_${FILENAME}.md"
 
 # Create the YAML front matter
 YAML_CONTENT="---
-type: \"links\"
-title: \"$FILENAME\"
+type: \"journal\"
+title: \"$TITLE\"
 date: $CURRENT_DATE_TIME
 draft: false
 thumbnail: \"\"
 alt: \"\"
-href: \"$URL\"
+jammin:
+  title: \"\"
+  href: \"\"
+gallery:
+  images:
+    image1:
+      id:
+      img: \"\"
+      alt: \"\"
+      width:
+      height:
 tags:
 - 
 ---"
