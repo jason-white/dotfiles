@@ -10,6 +10,10 @@ fi
 FILENAME=$1
 YEAR=$2
 
+
+# Add hyphens and convert to lower case for file name
+FORMATTED_FILENAME=$(echo "$FILENAME" | sed 's/ /-/g' | tr '[:upper:]' '[:lower:]')
+
 # Remove hyphens and replace them with spaces to create the title
 TITLE=$(echo "$FILENAME" | sed 's/-/ /g')
 
@@ -20,7 +24,7 @@ CURRENT_DATE=$(date '+%Y-%m-%d')
 CURRENT_DATE_TIME=$(date '+%Y-%m-%dT%H:%M:%S%z')
 
 # Prepend the filename with the current date
-PREPENDED_FILENAME="${CURRENT_DATE}_${FILENAME}.md"
+PREPENDED_FILENAME="${CURRENT_DATE}_${FORMATTED_FILENAME}.md"
 
 # Create the YAML front matter
 YAML_CONTENT="---

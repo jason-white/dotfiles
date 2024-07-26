@@ -29,13 +29,22 @@ yabai -m config mouse_action2 resize
 yabai -m mouse_drop_action swap
 
 yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add title='Settings$' manage=off sticky=on 
+yabai -m rule --add app="^System Preferences$" manage=off 
+yabai -m rule --add app="^System Information$" manage=off 
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 yabai -m rule --add label="Software Update" title="Software Update" manage=off
-yabai -m rule --add label="Software Update" title="Software Update" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
-#yabai -m rule --add label="mpv" app="^mpv$" manage=off
-#yabai -m rule --add app="^Things$" manage=off
-#yabai -m rule --add app="^Reminders$" manage=off
+yabai -m rule --add app="Alfred Preferences" manage=off
+yabai -m rule --add app='^Finder$' manage=off sticky=off
+yabai -m rule --add title="^Preferences$" manage=off
+yabai -m rule --add title="^General.*" manage=off   # Calendar settings
+yabai -m rule --add title="^Quick Entry.*" manage=off   # Things 3 settings
+yabai -m rule --add title="^Accounts.*" manage=off   # MacOS Mail accounts
+yabai -m rule --add title="^Run/Debug Configurations.*" manage=off   # PyCharm
+yabai -m rule --add title="^Disk Utility$" manage=off   # MacOS Disk utility
+yabai -m rule --add app="^App Store$" manage=off   # MacOS App Store
+yabai -m rule --add app="^Notes$" manage=off   # Apple Notes
