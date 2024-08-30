@@ -19,6 +19,7 @@ ZSH_THEME="dracula"
 # Aliases
 alias ov="cd /Users/jason/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/le_vault && nvim ."
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias air="~/go/bin/air"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
