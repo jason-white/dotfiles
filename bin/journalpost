@@ -1,50 +1,52 @@
 #!/bin/zsh
 
 # Check that the correct arguments are being used
-if [ "$#" -ne 2 ]; then
-  echo "Error: You must provide a file name and year"
+if [ "$#" -ne 3 ]; then
+  echo "Error: You must provide a Year, month and day '2024 08 13"
   exit 1
 fi
 
 # Assign arguments to variables
-FILENAME=$1
-YEAR=$2
+YEAR=$1
+MONTH=$2
+DAY=$3
 
 
 # Add hyphens and convert to lower case for file name
-FORMATTED_FILENAME=$(echo "$FILENAME" | sed 's/ /-/g' | tr '[:upper:]' '[:lower:]')
+FORMATTED_FILENAME=$(echo "${YEAR}-${MONTH}-${DAY}" | sed 's/ /-/g' | tr '[:upper:]' '[:lower:]')
 
 # Remove hyphens and replace them with spaces to create the title
-TITLE=$(echo "$FILENAME" | sed 's/-/ /g')
+TITLE=$(echo "$FORMATTED_FILENAME" | sed 's/-/ /g')
 
-cd "/Users/jason/Dev/jasonwhite.us/content/journal/${YEAR}/" || exit
+cd "/Users/jason/Dev/jasonwhite.us/content/journal/" || exit
+
+mkdir "${YEAR}/${MONTH}/${DAY}" || exit
 
 # Get the current date in the required formats
 CURRENT_DATE=$(date '+%Y-%m-%d')
 CURRENT_DATE_TIME=$(date '+%Y-%m-%dT%H:%M:%S%z')
 
 # Prepend the filename with the current date
-PREPENDED_FILENAME="${CURRENT_DATE}_${FORMATTED_FILENAME}.md"
+PREPENDED_FILENAME="${FORMATTED_FILENAME}.md"
 
 # Create the YAML front matter
 YAML_CONTENT="---
-type: \"journal\"
-title: \"$TITLE\"
+title: \"\"
 date: $CURRENT_DATE_TIME
+type: \"\" # journal or now
 draft: false
+image: \"\"
 thumbnail: \"\"
 alt: \"\"
+caption: \"\"
 jammin:
-  title: \"\"
-  href: \"\"
-gallery:
-  images:
-    image1:
-      id:
-      img: \"\"
-      alt: \"\"
-      width:
-      height:
+  - title: \"\"
+    href: \"\"
+# gallery:
+#   - src: ""
+#     alt: ""
+#     width: 2048
+#     height: 1365
 tags:
 - 
 ---"
